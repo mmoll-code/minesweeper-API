@@ -23,7 +23,7 @@ public class MineRestController {
     @Autowired
     private MineSweeperServiceImpl mineSweeperService;
 
-    @PostMapping(path = "start", consumes = "application/json")
+    @PostMapping(path = "/start", consumes = "application/json")
     public ResponseEntity startGame(@Valid @RequestBody GameRequest gameRequest) {
         try {
             mineSweeperService.createGame(gameRequest);
@@ -37,17 +37,17 @@ public class MineRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping(path = "flag")
+    @PostMapping(path = "/flag")
     public void flagCell(int row, int column, String type) {
         //TODO(): implement.
     }
 
-    @PostMapping(path = "reveal")
+    @PostMapping(path = "/reveal")
     public void revealCell(int row, int column) {
         //TODO(): implement.
     }
 
-    @PostMapping(path = "reveal")
+    @PostMapping(path = "/mark")
     public void markCell(int row, int column) {
         //TODO(): implement.
     }

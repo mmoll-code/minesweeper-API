@@ -11,7 +11,6 @@ import java.io.Serializable;
  * @author MartinM
  */
 @Data
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Cell implements Serializable {
     private int x;
     private int y;
