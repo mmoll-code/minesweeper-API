@@ -20,12 +20,12 @@ public class GameRequest {
     private String userId;
 
     @NotNull
-    @Min(value = 1, message = "Must be equal or greater than 1")
+    @Min(value = 2, message = "Must be equal or greater than 1")
     @Max(value = 100, message = "Must be equal or less than 100")
     private Integer rows;
 
     @NotNull
-    @Min(value = 1, message = "Must be equal or greater than 1")
+    @Min(value = 2, message = "Must be equal or greater than 1")
     @Max(value = 100, message = "Must be equal or less than 100")
     private Integer columns;
 

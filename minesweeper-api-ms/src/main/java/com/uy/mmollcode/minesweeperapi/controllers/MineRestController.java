@@ -1,13 +1,13 @@
 package com.uy.mmollcode.minesweeperapi.controllers;
 
-import com.uy.mmollcode.minesweeperapi.entity.BoardGameEntity;
 import com.uy.mmollcode.minesweeperapi.model.GameRequest;
-import com.uy.mmollcode.minesweeperapi.repository.BoardGameRepository;
 import com.uy.mmollcode.minesweeperapi.service.MineSweeperServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 /**
@@ -15,6 +15,7 @@ import java.net.URI;
  *
  * @author MartinM
  */
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class MineRestController {
@@ -23,18 +24,20 @@ public class MineRestController {
     private MineSweeperServiceImpl mineSweeperService;
 
     @PostMapping(path = "start", consumes = "application/json")
-    public ResponseEntity startGame(@RequestBody GameRequest gameRequest) {
+    public ResponseEntity startGame(@Valid @RequestBody GameRequest gameRequest) {
         try {
             mineSweeperService.createGame(gameRequest);
             URI location = URI.create(String.format("/api/%s", gameRequest.getUserId()));
+
             return ResponseEntity.created(location).build();
         } catch (Exception ex) {
-            // System.out.println("error!"); todo(martin): implement logging here.
+            log.error("Error on Start Game! {}", ex);
         }
+
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping(path = "flag-2")
+    @PostMapping(path = "flag")
     public void flagCell(int row, int column, String type) {
         //TODO(): implement.
     }
@@ -44,11 +47,15 @@ public class MineRestController {
         //TODO(): implement.
     }
 
-    @GetMapping(path = "user/romi")
-    public String getUserRomi(int row, int column) {
+    @PostMapping(path = "reveal")
+    public void markCell(int row, int column) {
         //TODO(): implement.
-        return "hola Romi";
     }
 
-    // TODO(): time-tracking.
+    @GetMapping(path = "/resume")
+    public ResponseEntity resumeGame(int row, int column) {
+        //TODO(): implement resumeGame.
+        return ResponseEntity.ok().build();
+    }
+
 }
