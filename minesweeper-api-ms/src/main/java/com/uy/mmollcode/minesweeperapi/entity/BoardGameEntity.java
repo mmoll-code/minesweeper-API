@@ -1,7 +1,10 @@
 package com.uy.mmollcode.minesweeperapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.uy.mmollcode.minesweeperapi.model.Cell;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.Data;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 
@@ -13,6 +16,11 @@ import javax.persistence.*;
 @Entity
 @Table(name="board_game")
 @Data
+@TypeDef(
+        typeClass = JsonStringType.class,
+        defaultForType = BoardGameEntity.class
+)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class BoardGameEntity {
 
     @Id
@@ -23,8 +31,8 @@ public class BoardGameEntity {
     @Column(name = "user_id")
     private String userId;
 
-//    @Column(name = "board_map")
-//    private Cell[][] boardMap;
+    @Column(columnDefinition = "json_board_map")
+    private Cell[][] boardMap;
 
     @Column(name = "rows_number")
     private int rows;
