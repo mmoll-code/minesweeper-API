@@ -26,7 +26,6 @@ public class MinesweeperApiApplication {
     public Docket swaggerDocumentation() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .paths(PathSelectors.ant("/api/*"))
                 .apis(RequestHandlerSelectors.basePackage("com.uy.mmollcode.minesweeperapi"))
                 .build();
     }

@@ -4,10 +4,11 @@ import com.uy.mmollcode.minesweeperapi.entity.BoardGameEntity;
 import com.uy.mmollcode.minesweeperapi.model.Cell;
 import com.uy.mmollcode.minesweeperapi.model.GameRequest;
 import com.uy.mmollcode.minesweeperapi.repository.BoardGameRepository;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -65,4 +66,8 @@ public class MineSweeperServiceImpl {
         return boardMap;
     }
 
+    public Optional<BoardGameEntity> games(String userId) {
+
+        return this.boardGameRepository.findByUserId(userId);
+    }
 }

@@ -2,6 +2,7 @@ package com.uy.mmollcode.minesweeperapi.controllers;
 
 import com.uy.mmollcode.minesweeperapi.model.GameRequest;
 import com.uy.mmollcode.minesweeperapi.service.MineSweeperServiceImpl;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class MineRestController {
     public ResponseEntity startGame(@Valid @RequestBody GameRequest gameRequest) {
         try {
             mineSweeperService.createGame(gameRequest);
-            URI location = URI.create(String.format("/api/%s", gameRequest.getUserId()));
+            URI location = URI.create(String.format("/api/games/%s", gameRequest.getUserId()));
 
             return ResponseEntity.created(location).build();
         } catch (Exception ex) {
@@ -52,10 +53,10 @@ public class MineRestController {
         //TODO(): implement.
     }
 
-    @GetMapping(path = "/resume")
-    public ResponseEntity resumeGame(int row, int column) {
-        //TODO(): implement resumeGame.
-        return ResponseEntity.ok().build();
+    @GetMapping(path = "/games/{userId}")
+    public ResponseEntity games(@PathVariable("userId") @ApiParam(value = "userId", example = "john1234") String userId) {
+
+        return ResponseEntity.ok(this.mineSweeperService.games(userId));
     }
 
 }
