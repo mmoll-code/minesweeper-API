@@ -14,7 +14,7 @@
 	<name>Minesweeper MicroService</name>
 	<description>Spring Boot REST-API for Minesweeper Project</description>
 	<properties>
-		<java.version>11</java.version>
+<!--		<java.version>11</java.version>-->
 	</properties>
 
 	<!-- Dependencies declarations -->
